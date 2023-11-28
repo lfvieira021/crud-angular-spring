@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-content>
+
+    <mat-toolbar color="accent">
+      <span>Cursos disponiveis</span>
+    </mat-toolbar>
+
+    <div *ngIf="cursos | async as cursos; else loading">
+
+      <mat-table [dataSource]="cursos" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="_id">
+          <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+          <mat-cell *matCellDef="let cursos"> {{cursos._id}} </mat-cell>
+        </ng-container>
+
+        <!-- Coluna de nome -->
+        <ng-container matColumnDef="nome">
+          <mat-header-cell *matHeaderCellDef> Cursos </mat-header-cell>
+          <mat-cell *matCellDef="let cursos"> {{cursos.nome}} </mat-cell>
+        </ng-container>
+
+        <!-- Category Column -->
+        <ng-container matColumnDef="categoria">
+          <mat-header-cell *matHeaderCellDef> Categoria </mat-header-cell>
+          <mat-cell *matCellDef="let cursos"> {{cursos.categoria}}
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="{{cursos.category | categoria}}"></mat-icon>
+
+          </mat-cell>
+
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+          <mat-header-cell *matHeaderCellDef>
+            <button mat-mini-fab color="accent" aria-label="Adicionar um curso" (click)="add()">
+              <mat-icon >add</mat-icon>
+            </button>
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let cursos">
+            <button mat-icon-button color="primary" (click)="edit(cursos)" aria-label="Editar cursos">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-icon-button color="warn" aria-label="Deletar cursos" (click)="deletar(cursos)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+
+
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+
+    <ng-template #loading>
+      <div class="spinner">
+        <mat-spinner></mat-spinner>
+
+      </div>
+
+    </ng-template>
+
+
+  </mat-card-content>
+</mat-card>

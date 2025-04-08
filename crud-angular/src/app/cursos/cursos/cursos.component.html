@@ -4,23 +4,23 @@
       <span>Cursos disponíveis</span>
     </mat-toolbar>
 
-    <div *ngIf="cursos | async as cursos; else loading">
-      <div class="header-row row">
-        <div class="main-columns">
-          <div class="col">Curso</div>
+    <div class="header-row row">
+      <div class="main-columns">
+        <div class="col">Curso</div>
         <div class="col">Categoria</div>
         <div class="col acoes-header">
           <button
-            mat-mini-fab
-            color="accent"
-            aria-label="Adicionar um curso"
-            (click)="add()"
+          mat-mini-fab
+          color="accent"
+          aria-label="Adicionar um curso"
+          (click)="add()"
           >
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
-        </div>
+    </div>
+  </div>
+  <div *ngIf="cursos | async as cursos; else loading">
       <ng-container *ngIf="cursos.length > 0; else vazio">
         <div class="row curso-item" *ngFor="let curso of cursos">
           <div class="col">{{ curso.nome }}</div>
@@ -30,7 +30,7 @@
             <mat-icon
               aria-hidden="false"
               aria-label="Ícone de categoria"
-              fontIcon="{{ curso.categoria}}"
+              fontIcon="{{ curso.categoria | categoria}}"
             ></mat-icon>
           </div>
 

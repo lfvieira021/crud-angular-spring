@@ -4,14 +4,16 @@ import { Cursos } from '../models/cursos';
 import { tap, first, delay, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+const urlEnvironment = environment.apiUrl;
+
 @Injectable({
   providedIn: 'root',
 })
 export class CursosService {
-  public readonly Api = `${environment}/cursos`;
-  
+  public readonly Api = `${urlEnvironment}/cursos`;
+
   constructor(private http: HttpClient) {}
-  
+
   // listar cursos
   listar() {
     return this.http.get<Cursos[]>(this.Api).pipe(

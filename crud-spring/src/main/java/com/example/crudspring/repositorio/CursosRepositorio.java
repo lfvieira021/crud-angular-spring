@@ -7,6 +7,6 @@ import com.example.crudspring.models.Cursos;
 
 @Repository
 public interface CursosRepositorio extends JpaRepository<Cursos, Long> {
-    
-    
+    Cursos findByNome(String nome);
+
 }

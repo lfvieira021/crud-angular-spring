@@ -3,6 +3,7 @@ package com.example.crudspring.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +21,11 @@ import jakarta.validation.constraints.Positive;
 @Validated
 @Service
 public class CursoService {
-    private final CursosRepositorio cursosRepositorio;
-    private final CursoMapper cursoMapper;
+    @Autowired
+    private CursosRepositorio cursosRepositorio;
 
-    public CursoService(CursosRepositorio cursosRepositorio, CursoMapper cursoMapper) {
-        this.cursosRepositorio = cursosRepositorio;
-        this.cursoMapper = cursoMapper;
-    }
+    @Autowired
+    private CursoMapper cursoMapper;
 
     public List<CursosDTO> list() {
         return cursosRepositorio.findAll()
@@ -42,12 +41,18 @@ public class CursoService {
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public CursosDTO criar(@Valid @NotNull CursosDTO cursos) {
-        return cursoMapper.toDTO(cursosRepositorio.save(cursoMapper.toEntity(cursos)));
+    public CursosDTO criar(@Valid @NotNull CursosDTO cursos) throws Exception {
+        var cursoBanco = cursosRepositorio.findByNome(cursos.nome());
+        
+        if (cursoBanco != null && cursoBanco.getNome() != null) {
+            throw new Exception("Já existe um curso com esse nome.");
+        } else {
+            var response = cursosRepositorio.save(cursoMapper.toEntity(cursos));
+            return cursoMapper.toDTO(response);
+        }
     }
 
-    public CursosDTO update(@NotNull @Positive Long id,
-            CursosDTO cursos) {
+    public CursosDTO update(@NotNull @Positive Long id, CursosDTO cursos) {
         return cursosRepositorio.findById(id)
                 .map(recordFound -> {
                     recordFound.setNome(cursos.nome());
@@ -62,6 +67,5 @@ public class CursoService {
     public void delete(@PathVariable @NotNull @Positive Long id) {
         cursosRepositorio.delete(cursosRepositorio.findById(id)
                 .orElseThrow(() -> new RecordNotFoundException(id)));
-
     }
 }

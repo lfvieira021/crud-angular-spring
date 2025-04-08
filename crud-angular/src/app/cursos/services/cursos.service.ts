@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cursos } from '../models/cursos';
 import { tap, first, delay, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
+const urlEnvironment = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root',
 })
 export class CursosService {
-  public readonly Api = 'api/cursos';
+  public readonly Api = `${urlEnvironment}/cursos`;
+
+  constructor(private http: HttpClient) {}
 
   // listar cursos
   listar() {
@@ -41,5 +46,4 @@ export class CursosService {
   remover(id: string): Observable<any> {
     return this.http.delete(`${this.Api}/${id}`);
   }
-  constructor(private http: HttpClient) {}
 }

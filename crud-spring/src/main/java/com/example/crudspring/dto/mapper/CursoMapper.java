@@ -3,7 +3,7 @@ package com.example.crudspring.dto.mapper;
 import org.springframework.stereotype.Component;
 
 import com.example.crudspring.dto.CursosDTO;
-import com.example.crudspring.models.Cursos;
+import com.example.crudspring.domain.Cursos;
 
 @Component
 public class CursoMapper {

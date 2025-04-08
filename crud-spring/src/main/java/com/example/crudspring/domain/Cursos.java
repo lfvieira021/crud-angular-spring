@@ -1,6 +1,5 @@
-package com.example.crudspring.models;
+package com.example.crudspring.domain;
 
-import org.hibernate.Length;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -27,19 +26,12 @@ public class Cursos {
     @JsonProperty("_id")
     private Long id;
 
-    @NotBlank
-    @NotNull
-    @org.hibernate.validator.constraints.Length(min = 5, max = 100)
     @Column(length = 100, nullable = false)
     private String nome;
 
-    @NotNull
-    @Pattern(regexp = "Back-end|Front-end")
     @Column(length = 10, nullable = false)
     private String categoria;
 
-    @NotNull
-    @Pattern(regexp = "Ativo|Inativo")
     @Column(length = 10, nullable = false)
     private String status = "Ativo";
 

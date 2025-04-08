@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cursos } from '../models/cursos';
 import { tap, first, delay, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CursosService {
-  public readonly Api = 'api/cursos';
+  public readonly Api = `${environment}/cursos`;
 
   // listar cursos
   listar() {

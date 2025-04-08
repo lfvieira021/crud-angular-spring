@@ -3,7 +3,7 @@ package com.example.crudspring.repositorio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.crudspring.models.Cursos;
+import com.example.crudspring.domain.Cursos;
 
 @Repository
 public interface CursosRepositorio extends JpaRepository<Cursos, Long> {

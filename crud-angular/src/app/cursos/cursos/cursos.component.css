@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.20);
+  height: 100vh;
 }
 
 .main-card{
@@ -24,9 +24,16 @@ mat-card{
   align-items: center;
 }
 
+.main-columns{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .header-row {
-  font-weight: bold;
-  border-bottom: 2px solid #333;
+  font-weight: 500;
+  border-bottom: 1px solid #333;
   margin-bottom: 8px;
 }
 
@@ -56,3 +63,16 @@ mat-card{
   background-color: #f9f9f9;
 }
 
+.hint{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 32px;
+  margin-top: 20px;
+  color: #757575; 
+  font-size: 1rem;
+  text-align: center;
+  opacity: 0.9;
+}

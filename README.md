@@ -2,7 +2,7 @@
  
 # CRUD Angular + Spring Boot
 
-Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida com Angular no front-end e Spring Boot no back-end.
+Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida com Angular (version 15.2.3) no front-end e Spring Boot no back-end.
 
 ## Funcionalidades
 
@@ -20,7 +20,7 @@ Este projeto é uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida
 ## Pré-requisitos
 
 - Node.js
-- Angular CLI
+- Angular CLI (version 15.2.3)
 - Java JDK
 
 ## Como Executar

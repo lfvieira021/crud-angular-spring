@@ -9,7 +9,9 @@ import { environment } from 'src/environments/environment';
 })
 export class CursosService {
   public readonly Api = `${environment}/cursos`;
-
+  
+  constructor(private http: HttpClient) {}
+  
   // listar cursos
   listar() {
     return this.http.get<Cursos[]>(this.Api).pipe(
@@ -42,5 +44,4 @@ export class CursosService {
   remover(id: string): Observable<any> {
     return this.http.delete(`${this.Api}/${id}`);
   }
-  constructor(private http: HttpClient) {}
 }

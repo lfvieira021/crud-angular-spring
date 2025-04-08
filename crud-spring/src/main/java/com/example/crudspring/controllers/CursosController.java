@@ -2,6 +2,7 @@ package com.example.crudspring.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,16 +28,12 @@ import jakarta.validation.constraints.Positive;
 @RequestMapping("/api/cursos")
 public class CursosController {
 
-    private final CursoService cursoService;
-
-    public CursosController(CursoService cursoService) {
-        this.cursoService = cursoService;
-    }
+    @Autowired
+    private CursoService cursoService;
 
     @GetMapping
     public @ResponseBody List<CursosDTO> list() {
         return cursoService.list();
-
     }
 
     @GetMapping("/{id}")
@@ -46,13 +43,13 @@ public class CursosController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public CursosDTO criar(@RequestBody @Valid CursosDTO cursos) {
+    public CursosDTO criar(@RequestBody @Valid CursosDTO cursos) throws Exception {
         return cursoService.criar(cursos);
     }
 
     @PutMapping("/{id}")
     public CursosDTO update(@PathVariable @NotNull @Positive Long id,
-            @RequestBody CursosDTO cursos) {
+                            @RequestBody CursosDTO cursos) {
         return cursoService.update(id, cursos);
     }
 

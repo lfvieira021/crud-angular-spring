@@ -4,5 +4,55 @@
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.20);
-
 }
+
+.main-card{
+  width: 60%;
+  
+}
+
+mat-card{
+  display: flex;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+}
+
+.header-row {
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+  margin-bottom: 8px;
+}
+
+.col {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.acoes-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.cell-flex {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.curso-item:hover {
+  background-color: #f9f9f9;
+}
+

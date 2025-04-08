@@ -1,68 +1,63 @@
 <mat-card>
-  <mat-card-content>
-
+  <mat-card-content class="main-card">
     <mat-toolbar color="accent">
-      <span>Cursos disponiveis</span>
+      <span>Cursos disponíveis</span>
     </mat-toolbar>
 
     <div *ngIf="cursos | async as cursos; else loading">
+      <div class="header-row row">
+        <div class="col">Curso</div>
+        <div class="col">Categoria</div>
+        <div class="col acoes-header">
+          <button
+            mat-mini-fab
+            color="accent"
+            aria-label="Adicionar um curso"
+            (click)="add()"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
 
-      <mat-table [dataSource]="cursos" class="mat-elevation-z8">
+      <div class="row curso-item" *ngFor="let curso of cursos">
+        <div class="col">{{ curso.nome }}</div>
 
-        <ng-container matColumnDef="_id">
-          <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-          <mat-cell *matCellDef="let cursos"> {{cursos._id}} </mat-cell>
-        </ng-container>
+        <div class="col cell-flex">
+            {{ curso.categoria }}
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Ícone de categoria"
+              fontIcon="{{ curso.categoria | categoria }}"
+            ></mat-icon>
+        </div>
 
-        <!-- Coluna de nome -->
-        <ng-container matColumnDef="nome">
-          <mat-header-cell *matHeaderCellDef> Cursos </mat-header-cell>
-          <mat-cell *matCellDef="let cursos"> {{cursos.nome}} </mat-cell>
-        </ng-container>
+        <div class="col acoes">
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="edit(curso)"
+            aria-label="Editar curso"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
 
-        <!-- Category Column -->
-        <ng-container matColumnDef="categoria">
-          <mat-header-cell *matHeaderCellDef> Categoria </mat-header-cell>
-          <mat-cell *matCellDef="let cursos"> {{cursos.categoria}}
-            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="{{cursos.category | categoria}}"></mat-icon>
-
-          </mat-cell>
-
-        </ng-container>
-
-        <ng-container matColumnDef="acoes">
-          <mat-header-cell *matHeaderCellDef>
-            <button mat-mini-fab color="accent" aria-label="Adicionar um curso" (click)="add()">
-              <mat-icon >add</mat-icon>
-            </button>
-          </mat-header-cell>
-
-          <mat-cell *matCellDef="let cursos">
-            <button mat-icon-button color="primary" (click)="edit(cursos)" aria-label="Editar cursos">
-              <mat-icon>edit</mat-icon>
-            </button>
-
-            <button mat-icon-button color="warn" aria-label="Deletar cursos" (click)="deletar(cursos)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-cell>
-
-
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="deletar(curso)"
+            aria-label="Deletar curso"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
 
     <ng-template #loading>
       <div class="spinner">
         <mat-spinner></mat-spinner>
-
       </div>
-
     </ng-template>
-
-
   </mat-card-content>
 </mat-card>
